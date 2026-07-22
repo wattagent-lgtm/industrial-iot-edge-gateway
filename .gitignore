@@ -1,0 +1,18 @@
+# Local credentials and generated configuration
+gateway/config.py
+clients/config.py
+certs/
+**/certs/
+*.pem
+*.key
+*.crt
+webrepl_cfg.py
+
+# Runtime and test output
+crash.log
+reliability-*.csv
+multirate-*.csv
+loadtest-*.csv
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Industrial Gateway</title><link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header><img src="/logo.svg" alt="Gateway"><div><h1 id="gatewayName">Industrial Gateway</h1><p>EDGE OPERATIONS CONSOLE</p></div><span id="gatewayStatus" class="badge">CONNECTING</span></header>
+  <main>
+    <section class="hero"><div><small>SYSTEM HEALTH</small><strong id="health">Operational</strong></div><div><button id="lteTest">Test 4G</button> <button id="restart">Restart Gateway</button></div></section>
+    <section class="grid" id="metrics">
+      <article><label>WiFi</label><b id="wifiStatus">—</b><span id="wifiRssi">—</span></article>
+      <article><label>IP Address</label><b id="ipAddress">—</b><span>Network interface</span></article>
+      <article><label>Uptime</label><b id="uptime">—</b><span>Since last restart</span></article>
+      <article><label>Free Memory</label><b id="memory">—</b><span>ESP32 heap</span></article>
+      <article><label>Packets Received</label><b id="packets">0</b><span id="rate">0 packets/s</span></article>
+      <article><label>Connected Clients</label><b id="clients">0</b><span id="devicesCount">0 known devices</span></article>
+      <article><label>TCP Server</label><b id="tcpStatus">—</b><span>Port 5005</span></article>
+      <article><label>HTTP Server</label><b id="httpStatus">—</b><span>REST API + console</span></article>
+      <article><label>MQTT</label><b id="mqttStatus">—</b><span>Future integration</span></article>
+      <article><label>Cloud</label><b id="cloudStatus">—</b><span>Future integration</span></article>
+      <article><label>4G LTE</label><b id="lteStatus">—</b><span id="lteOperator">Initializing modem…</span></article>
+      <article><label>LTE Signal</label><b id="lteSignal">—</b><span id="lteIp">No mobile IP</span></article>
+      <article><label>CPU Usage</label><b id="cpu">N/A</b><span>Not exposed by ESP32</span></article>
+      <article><label>Firmware</label><b id="firmware">—</b><span id="systemTime">Time synchronizing…</span></article>
+    </section>
+    <section class="panel"><h2>Latest Telemetry</h2><div class="facts"><span>Client IP <b id="lastIp">—</b></span><span>Received <b id="lastTime">—</b></span></div><pre id="lastJson">Waiting for data…</pre></section>
+    <section class="panel"><h2>Connected Devices</h2><div class="table"><table><thead><tr><th>Device</th><th>Node ID</th><th>IP Address</th><th>Last Seen</th><th>Packets</th></tr></thead><tbody id="deviceRows"></tbody></table></div></section>
+    <section class="panel"><h2>System Log</h2><div id="logs" class="logs"></div></section>
+  </main>
+  <footer><span>Industrial Edge Gateway</span><span id="updated">Awaiting status</span></footer>
+  <script src="/app.js"></script>
+</body></html>
