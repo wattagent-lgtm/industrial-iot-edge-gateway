@@ -1,5 +1,9 @@
 # Industrial IoT Edge Gateway
 
+[![Repository checks](https://github.com/wattagent-lgtm/industrial-iot-edge-gateway/actions/workflows/quality.yml/badge.svg)](https://github.com/wattagent-lgtm/industrial-iot-edge-gateway/actions/workflows/quality.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![MicroPython](https://img.shields.io/badge/runtime-MicroPython-2b2728.svg)](https://micropython.org/)
+
 A production-oriented MicroPython gateway for the LILYGO T-A7670E
 (ESP32 + A7670E LTE). It receives industrial telemetry over TCP/JSON,
 acknowledges local clients immediately, and publishes data through a bounded
@@ -76,6 +80,13 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass `
 
 See [SECURITY.md](SECURITY.md). Real credentials, certificates, private keys,
 and runtime logs are intentionally excluded.
+
+## Contributing
+
+Bug reports, test evidence, and focused improvements are welcome. Read
+[CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
+
+Changes are recorded in [CHANGELOG.md](CHANGELOG.md).
 
 ## Roadmap
 

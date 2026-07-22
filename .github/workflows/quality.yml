@@ -1,0 +1,74 @@
+name: Repository checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile Python source
+        run: |
+          python - <<'PY'
+          import pathlib
+          failures = []
+          for path in pathlib.Path('.').rglob('*.py'):
+              try:
+                  compile(path.read_bytes(), str(path), 'exec')
+              except Exception as exc:
+                  failures.append(f"{path}: {exc}")
+          if failures:
+              raise SystemExit("\n".join(failures))
+          print("Python syntax OK")
+          PY
+
+      - name: Validate required project files
+        shell: pwsh
+        run: |
+          $required = @(
+            'README.md', 'LICENSE', 'SECURITY.md',
+            'gateway/main.py', 'gateway/tcp_server.py',
+            'gateway/mqtt_manager.py', 'gateway/config.example.py',
+            'dashboard/index.html', 'tests/simulate_multirate_workload.ps1'
+          )
+          $missing = $required | Where-Object { -not (Test-Path $_) }
+          if ($missing) { throw "Missing required files: $($missing -join ', ')" }
+
+      - name: Parse PowerShell test scripts
+        shell: pwsh
+        run: |
+          $errors = @()
+          Get-ChildItem tests -Filter *.ps1 | ForEach-Object {
+            $tokens = $null
+            $parseErrors = $null
+            [void][System.Management.Automation.Language.Parser]::ParseFile(
+              $_.FullName, [ref]$tokens, [ref]$parseErrors
+            )
+            $errors += $parseErrors
+          }
+          if ($errors.Count) { throw ($errors | Out-String) }
+
+      - name: Reject private artifacts
+        shell: pwsh
+        run: |
+          $forbiddenNames = @('config.py', 'crash.log', 'webrepl_cfg.py')
+          $bad = Get-ChildItem -Recurse -File | Where-Object {
+            $forbiddenNames -contains $_.Name -or
+            $_.Extension -in @('.key', '.pem', '.der')
+          }
+          if ($bad) { throw "Private artifacts found: $($bad.FullName -join ', ')" }

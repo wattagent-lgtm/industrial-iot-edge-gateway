@@ -1,0 +1,22 @@
+name: Feature request
+description: Propose a focused industrial gateway improvement
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Industrial use case
+      description: Describe the machine, data flow, and operational need.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Memory, timing, network, or compatibility constraints

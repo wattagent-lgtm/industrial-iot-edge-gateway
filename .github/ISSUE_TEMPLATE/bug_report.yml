@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible gateway or client defect
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Never include passwords, certificates, private keys, SIM details, or public IP addresses.
+  - type: input
+    id: hardware
+    attributes:
+      label: Hardware and firmware
+      placeholder: LILYGO T-A7670E, MicroPython version
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem description
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized logs and test evidence
+      render: text
+  - type: dropdown
+    id: regression
+    attributes:
+      label: Did this work previously?
+      options: ["Yes", "No", "Unknown"]
+    validations:
+      required: true
