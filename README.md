@@ -81,6 +81,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass `
 Read the complete Thai reference directly on GitHub:
 
 - [Client → TCP Gateway → 4G MQTT → AWS IoT Core data flow](docs/IIoT_Gateway_Client_to_AWS_Data_Flow_TH.md)
+- [Traffic calculation principle and sizing formulas](docs/TRAFFIC_CALCULATION.md)
 - [Original Microsoft Word edition](docs/IIoT_Gateway_Client_to_AWS_Data_Flow_TH_v2.docx)
 
 The guide covers immediate TCP acknowledgement, asynchronous MQTT queues,

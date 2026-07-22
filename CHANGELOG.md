@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here.
 
+## [Unreleased]
+
+### Added
+
+- Dedicated TCP/JSON/MQTT/TLS/4G traffic calculation guide.
+- PowerShell traffic and SIM data-plan sizing calculator.
+
 ## [1.0.0] - 2026-07-22
 
 ### Added
