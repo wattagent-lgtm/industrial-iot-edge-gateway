@@ -76,6 +76,17 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass `
 - `tests/` - multi-rate load and reliability tools
 - `docs/` - Thai architecture and data-flow reference
 
+## Architecture and data-flow guide
+
+Read the complete Thai reference directly on GitHub:
+
+- [Client → TCP Gateway → 4G MQTT → AWS IoT Core data flow](docs/IIoT_Gateway_Client_to_AWS_Data_Flow_TH.md)
+- [Original Microsoft Word edition](docs/IIoT_Gateway_Client_to_AWS_Data_Flow_TH_v2.docx)
+
+The guide covers immediate TCP acknowledgement, asynchronous MQTT queues,
+UNS topics, multi-rate sampling, deadband, traffic calculation, DynamoDB,
+failure recovery, and laboratory comparison results.
+
 ## Security
 
 See [SECURITY.md](SECURITY.md). Real credentials, certificates, private keys,
