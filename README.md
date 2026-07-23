@@ -37,19 +37,23 @@ AWS IoT Core --> IoT Rule --> DynamoDB
 - Uses Wi-Fi/HTTP supervisors, static addressing, and fatal crash recovery.
 - Includes PowerShell workload and reliability test tools.
 
-## Validated laboratory result
+## Latest validated laboratory result
 
 | Metric | 30-minute result |
 |---|---:|
-| TCP ACK | 2,032 / 2,032 (100%) |
-| Gateway availability | 100% (60/60 samples) |
+| TCP ACK | 2,030 / 2,035 (99.75%) |
+| Sampled gateway availability | 100% |
 | MQTT dropped / failed | 0 / 0 |
-| Service restarts | 0 |
-| Average / maximum TCP latency | 182.9 / 627.2 ms |
-| Start / end free memory | 68.2 / 67.7 KB |
-| Average LTE signal | -70.4 dBm |
+| Automatic recoveries | 1 |
+| Average / maximum TCP latency | 182 / 7,158.8 ms |
+| Average free memory | 58.4 KB |
+| Average LTE signal | -63.2 dBm |
 
-These are laboratory observations, not certification results.
+This WebREPL-disabled run improved substantially over previous runs, but one
+fatal ESP32 network-I/O recovery remains. These are laboratory observations,
+not certification results. See the
+[validated operating envelope and current limitations](docs/VALIDATED_OPERATING_ENVELOPE.md)
+before using the project for capacity planning.
 
 ## Quick start
 
@@ -82,6 +86,7 @@ Read the complete Thai reference directly on GitHub:
 
 - [Client → TCP Gateway → 4G MQTT → AWS IoT Core data flow](docs/IIoT_Gateway_Client_to_AWS_Data_Flow_TH.md)
 - [Traffic calculation principle and sizing formulas](docs/TRAFFIC_CALCULATION.md)
+- [Validated operating envelope and current limitations](docs/VALIDATED_OPERATING_ENVELOPE.md)
 - [Original Microsoft Word edition](docs/IIoT_Gateway_Client_to_AWS_Data_Flow_TH_v2.docx)
 
 The guide covers immediate TCP acknowledgement, asynchronous MQTT queues,

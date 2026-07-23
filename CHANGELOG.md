@@ -8,6 +8,15 @@ All notable changes to this project are documented here.
 
 - Dedicated TCP/JSON/MQTT/TLS/4G traffic calculation guide.
 - PowerShell traffic and SIM data-plan sizing calculator.
+- Evidence-based operating envelope, provisional rating, and qualification
+  targets derived from one-minute through two-hour laboratory tests.
+
+### Changed
+
+- Updated the public configuration template with the lower-socket-pressure
+  profile used for reliability testing.
+- Replaced the earlier idealized README result with the latest transparent
+  30-minute WebREPL-disabled result.
 
 ## [1.0.0] - 2026-07-22
 
