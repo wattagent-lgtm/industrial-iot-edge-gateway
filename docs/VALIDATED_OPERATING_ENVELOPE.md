@@ -75,6 +75,72 @@ conservative rating:
 The 50-device table capacity is a software allocation limit. It is not a
 validated concurrent-device rating.
 
+## Hardware-aware specification
+
+The practical limits below account for the complete ESP32 + A7670E data path,
+not only the LTE link. MicroPython heap, TLS/MQTT processing, UART modem
+communication, Wi-Fi sockets, and event-loop stability are the controlling
+constraints.
+
+| Parameter | Recommended specification |
+|---|---:|
+| Sustained aggregate input target | 0.5-1.0 msg/s |
+| Validated laboratory workload | Approximately 1.1-1.3 msg/s |
+| Short burst target | 2 msg/s |
+| Recommended active TCP clients | 1-5 |
+| Initial deployment device limit | 10 devices |
+| Recommended JSON payload | 1 KB or less |
+| Maximum accepted JSON frame | 4 KB |
+| Recommended MQTT publish rate | 1 msg/s or less |
+| Minimum operational free heap | 24 KB |
+| Preferred operational free heap | 30 KB or more |
+| Real-time or safety control | Not supported |
+
+The gateway is intended for monitoring, telemetry aggregation, events,
+diagnostics, and cloud forwarding. Time-critical control and safety interlocks
+must remain in a PLC or other deterministic controller.
+
+## Ten-minute baseline
+
+The standard preliminary qualification profile is:
+
+```text
+fast telemetry:       every 1 second
+slow telemetry:       every 5 seconds
+event evaluation:     every 15 seconds, publish on change
+diagnostic telemetry: every 60 seconds
+deadband:             enabled
+```
+
+Deadband makes the exact message count dependent on simulated value changes.
+A normal ten-minute run should produce approximately 540-770 TCP messages,
+equivalent to about 0.9-1.3 msg/s.
+
+| Metric | Pass | Review | Fail |
+|---|---:|---:|---:|
+| TCP ACK success | 99.5% or better | 99.0-99.5% | Below 99.0% |
+| Failed messages | 0-3 | 4-7 | More than 7 |
+| Sampled availability | 100% | 99-100% | Below 99% |
+| Unexpected resets | 0 | 1 with recovery | More than 1 |
+| Average TCP ACK latency | Below 300 ms | 300-500 ms | Above 500 ms |
+| Maximum TCP ACK latency | Below 2 s | 2-5 s | Above 5 s |
+| MQTT dropped or failed | 0 | 1-2 | More than 2 |
+| MQTT queue at end | 0-2 | 3-10 | More than 10 |
+| Minimum free heap | 28 KB or more | 24-28 KB | Below 24 KB |
+
+This short-run threshold is deliberately hardware-aware. With only about 600
+messages, a single failure already reduces ACK success to approximately
+99.83%. Passing ten minutes is a prerequisite, not evidence of 24-hour
+reliability.
+
+## Qualification levels
+
+| Level | Minimum evidence |
+|---|---|
+| Lab passed | ACK >=99.5%, availability >=99%, automatic recovery, no MQTT drop, free heap >=24 KB |
+| Pilot ready | ACK and availability >=99.9%, zero reset over 6 hours, no MQTT drop/failure, free heap >=28 KB |
+| Production candidate | 24 hours, ACK and availability >=99.9%, zero unexpected reset, no MQTT drop/failure, free heap >=30 KB |
+
 ## Recommended balanced telemetry profile
 
 Sampling and publishing are separate activities. High-rate signals should be
