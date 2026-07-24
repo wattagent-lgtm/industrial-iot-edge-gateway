@@ -10,6 +10,9 @@ All notable changes to this project are documented here.
 - PowerShell traffic and SIM data-plan sizing calculator.
 - Evidence-based operating envelope, provisional rating, and qualification
   targets derived from one-minute through two-hour laboratory tests.
+- Hardware-aware ESP32 + A7670E operating specification.
+- Repeatable ten-minute workload baseline with pass/review/fail limits.
+- Lab Passed, Pilot Ready, and Production Candidate qualification levels.
 
 ### Changed
 
